@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/account.css' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>{{user_profile.user.username}}</title>
+</head>
+
+<body>
+    <nav>
+        <div class="nav-left">
+            <a style="text-decoration:none; color:white" href="{% url 'index'%}">
+                <p>SOCIAL SERVICE</p>
+            </a>
+        </div>
+        <div class="nav-center">
+            <p class="title-post">{{user_profile.user.username}}</p>
+        </div>
+        <div class="nav-right">
+            <p class="name">Welcome <strong>{{user.username}}</strong></p>
+            <div class="profile-pic">
+                <img src="{{user_profile.profilePic.url}}" alt="" />
+            </div>
+           <a href="{% url 'logout' %}"><p> <i class="fa-solid fa-right-from-bracket"></i></p></a>
+        </div>
+    </nav>
+    <section class="profile">
+        <sidebar class="sidebar">
+            <img src="{{user_profile.profilePic.url}}" alt="" class="profile-img" />
+            <div class="upload-icon">
+                <p><i class="fa-regular fa-image"></i></p>
+            </div>
+            <h1>{{user_profile.user.username}}</h1>
+            <p>{{user_profile.user.service}}</p>
+            <p><strong>Location-</strong> {{user_profile.location}}</p>
+            <p style="color:gray; margin:5px 0"><i class="fa-regular fa-envelope"></i>{{user_profile.email}}</p>
+            <p style="margin-top:3px">You are following 230 people</p>
+            <!--<button>Follow</button>-->
+
+            <p class="prof-text">{{user_profile.biography}}</p>
+                <a href="{% url 'update' %}"><button>Edit Profile</button></a>
+              
+        </sidebar>
+        <main>
+            <div class="service-wrapper">
+                {% if number_of_posts >= 1%}
+                {% for post in user_posts %}
+                <div class="single-product">
+                    <img src="{{post.image.url}}" alt="" class="product-img" />
+                    <h5>{{post.service}}</h5>
+                    <p>Charges based on contract</p>
+                    <p class="account-desc">{{post.description}}</p>
+                    <div class="view">
+                        <a href="{% url 'post' post.id %}"><p><i class="fa-solid fa-arrow-right"></i></p></a>
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <div class="no-post">
+                    <p>You have not posted any service yet</p>
+                    <a href="{% url 'index' %}">Create a service</a>
+                </div>
+                {% endif %}                      
+        </div>
+        {% if number_of_posts > 4 %}
+        <button class="load-more">Load more...</button>
+        {% endif %}
+        
+        </main>        
+    </section>
+</body>
+
+</html>

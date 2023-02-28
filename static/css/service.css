@@ -1,0 +1,63 @@
+.service{
+    width:100%;
+    margin-top: 60px;
+}
+
+.service-img{
+    width:100%;
+    height:50vh;
+    object-fit:cover;
+}
+
+.connect-details{
+    padding:10px;
+}
+
+.connect-details button{
+    width:200px;
+    padding:10px 4px;
+    border:none;
+    color:white;
+    border-radius:50px;
+    background-color: #668cff;
+    cursor: pointer;
+}
+
+/*Related products*/
+.related{
+    width:100%;
+    padding:10px;
+    display: flex;
+    flex-wrap:wrap;
+    gap:4px;
+    align-items: center;
+    justify-content: center;
+}
+
+.single-related{
+    width:200px;
+    height:200px;
+    border-radius: 5px;
+    font-family: 'Nunito Sans', sans-serif;
+    overflow:hidden !important;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.26);
+        -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.26);
+        -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.26);
+}
+
+.related-img{
+    width:100%;
+    height:60%;
+}
+
+.single-related h1{
+    font-size: 18px;
+    padding-left:4px;
+    color:gray;
+}
+
+.single-related p {
+    font-size: 14px;
+    padding-left: 4px;
+    color: #668cff;
+}

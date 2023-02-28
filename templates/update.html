@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/update.css' %}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Document</title>
+</head>
+<body>
+    <nav>
+        <div class="nav-left">
+        <a style="text-decoration:none; color:white" href="{% url 'index'%}">
+            <p>SOCIAL SERVICE</p>
+        </a>
+        </div>
+        <div class="nav-center">
+            <p class="update-text">Update your profile</p>
+        </div>
+        <div class="notification">
+            <p class="bell-icon"><i class="fa-regular fa-bell"></i></p>
+            <div class="count">
+                <p>6</p>
+            </div>
+        </div>
+        <div class="nav-right">
+            <p class="name">Welcome <strong>{{user.username}}</strong></p>
+            <div class="profile-pic">
+                <img src="{{user_profile.profilePic.url}}" alt="" />
+            </div>
+            <a href="logout">
+                <p> <i class="fa-solid fa-right-from-bracket"></i></p>
+            </a>
+        </div>
+    </nav>
+    
+    <!--Personal profile-->
+    <section class="update-form">
+        <div class="profile-image">
+            <img src="{{user_profile.profilePic.url}}" alt="" />
+        </div>
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="image" />
+            <input type="text" name="location" value="{{user_profile.location}}" placeholder="Enter location"/>
+            <input type="text" name="service" value="{{user_profile.service}}" placeholder="Service or property selling"/>
+            <input type="text" name="phone" value="{{user_profile.phone}}" placeholder="Business phone"/>
+            <textarea placeholder="Biography..." name="biography">{{user_profile.biography}}</textarea>
+            <button class="update-btn">Upload <i class="fa-solid fa-cloud-arrow-up"></i></button>
+        </form>
+    </section>
+</body>
+</html>

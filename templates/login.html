@@ -1,0 +1,33 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/register.css' %}" />
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="register">
+        <h1 class="text-logo">SOCIAL <span>SERVICE</span></h1>
+        <h5 class="register-title">Sign in <span>here</span> to continue</h5>
+        <form action="" method="POST" class="form">
+            {% csrf_token %}
+            <input type="username" name="username" placeholder="Enter Username" />
+            <input type="password" name="password" placeholder="Enter password" />
+            <button type="submit">Login</button>
+        </form>
+        <div>
+            {% for message in messages %}
+            <p style="color:red">{{message}}</p>
+            {% endfor %}
+        </div>
+        <p>Don't have an account? Sign up<a href="{% url 'register' %}"> here</a></p>
+    </div>
+</body>
+
+</html>

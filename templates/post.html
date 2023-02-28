@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/post.css' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{post.user}} - {{post.service}}</title>
+</head>
+<body>
+    <nav>
+        <div class="nav-left">
+            <a style="text-decoration:none; color:white" href="{% url 'index'%}">
+                <p>SOCIAL SERVICE</p>
+            </a>
+        </div>
+        <div class="nav-center">            
+            <p class="title-post">{{post.service}}</p>           
+        </div>
+        <div class="nav-right">
+            <p class="name">Welcome <strong>{{user.username}}</strong></p>
+            <div class="profile-pic">
+                <img src="{{user_profile_logged.profilePic.url}}" alt="" />
+            </div>
+            <a href="{% url 'logout' %}">
+                <p> <i class="fa-solid fa-right-from-bracket"></i></p>
+            </a>
+        </div>
+    </nav>
+    <main class="post">
+        <img class="post_img" src="{{post.image.url}}" alt=""/>
+        <div class="post-title-text">
+        <p style="margin-top:10px"><strong>{{post.service}}</strong> - <i class="fa-solid fa-location-dot"></i>
+            {{post.location}}</p>
+
+            <h2>Service description</h2>
+            <p class="post-desc">{{post.description}}</p>
+            <div class="post-details">
+                <img class="post_img" src="{{post.profileImg.url}}" alt=""/>
+                <div>
+                    <h3>{{post.user}} posted this</h3>
+                    <p>{{post.created_At}}</p>
+                </div>
+            </div>
+        </div>
+        </main>
+</body>
+</html>

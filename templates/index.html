@@ -1,0 +1,280 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Home</title>
+</head>
+<body>
+    <nav>
+        <div class="nav-left">
+            <a  style="text-decoration:none; color:white" href="{% url 'index'%}"><p>SOCIAL SERVICE</p></a>
+        </div>
+        <div class="nav-center">
+            <form action="/search" method="GET">
+                {% csrf_token %}
+                <input type="text" name="service" placeholder="Search..."/>
+                <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>  
+            </form>
+        </div>
+        <div class="notification">
+            <i class="fa-solid fa-user-group"></i>
+        </div>
+        <div class="nav-right">
+            <p class="name">Welcome <strong>{{user.username}}</strong></p>
+            <a href="{% url 'account' user.username %}" class="profile-pic">                
+                <img src="{{user_profile.profilePic.url}}" alt=""/>
+            </a>
+            <a href="logout">
+                <p> <i class="fa-solid fa-right-from-bracket"></i></p>
+            </a>
+        </div>
+        <div class="notification-tab">
+            {% for profile in profiles  %}
+            <a href="{% url 'profile' profile.user %}" class="person-notification">
+                <div class="sliced-letter">
+                    <img src="{{profile.profilePic.url}}" alt=""/>
+                </div>
+                <div class="notification-texts">
+                    <h5>{{profile.user.username}} -  {{profile.location}}</h5>
+                    <p>{{profile.service}}</p>
+                </div>
+                {% if profile.user.username == user.username %}
+                <p class="you">You</p>
+                {% endif %}
+            </a>
+            {% endfor %} 
+        </div>
+    </nav>
+    <section class="index-section">
+        <!--Posts section-->
+        <div class="nav-center-2">
+            <form action="/search" method="GET">
+                {% csrf_token %}
+                <input type="text" name="service" placeholder="Search..." />
+                <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </form>
+        </div>
+        <div class="mobile-view-upload">
+            <div class="pic-text">
+                <a href="{% url 'account' user.username %}" class="mobile-profile-pic">
+                    <img src="{{user_profile.profilePic.url}}" alt="" />
+                </a>
+                <p>Create a new service post {{user.username}}</p>
+            </div>                
+                <button id="create-p-btn">Create Post</button>
+        </div>
+
+        <div class="mobile-fields">
+            <p id="close-btn"><i class="fa-solid fa-circle-xmark"></i></p>
+            <form action="upload" method="POST" enctype="multipart/form-data" class="mobile-form">
+                {% csrf_token %}
+                <input class="input" name="service" type="text" placeholder="Type title..." required />
+                <input class="input" type="text" name="location" placeholder="Type location..." required />
+                <input class="input" type="text" name="cost" placeholder="Type cost..." required />
+                <input class="input" type="text" name="phone" placeholder="Business number..." required />
+                <textarea class="textarea" name="description" placeholder="Write description..." required></textarea>
+                <input class="input" type="file" name="image" required />
+                <button class="publish" type="submit">Publish</button>
+            </form>
+        </div>
+        <div style="display: flex;">
+        <main>
+           <!-- <div class="category">
+                <p class="active">All</p>
+                <p>Services</p>
+                <p>Property</p>
+            </div>-->
+            <div class="services-wrapper">               
+                <!--Service 1-->
+                {% for post in posts_list reversed %}
+                    <div class="service">
+                        <div class="service-image">
+                            <img src="{{post.image.url}}" alt="" />
+                            <div class="price-tag">
+                                <p>Kes {{post.cost}}</p>
+                            </div>
+                        </div>
+                        <a class="animation" href="{% url 'post' post.id %}" style="text-decoration:none; color:black"><p style="margin-top:10px"><strong>{{post.service}}</strong> - <i class="fa-solid fa-location-dot"></i>
+                            {{post.location}}</p></a>
+                        <div class="description">
+                            <h2>Service description</h2>
+                            <p>{{post.description}}</p>
+                        </div>
+                        <div class="details">
+                            <div class="left">
+                                <div class="info">
+                                    <a href="{% url 'profile' post.user%}">
+                                        <img src="{{post.profileImg.url}}" alt="" />
+                                    </a>
+                                    <div>
+                                        <h1>{{post.user}}</h1>
+                                        <p>{{post.created_At}}</p>
+                                    </div>
+                                </div>
+                                <a href='tel:{{post.phone}}'><button>Reach</button></a>
+                            </div>
+                            <div class="right">
+                                <div class="like-comment-follow">
+                                    <a style="text-decoration:none" href="like?post_id={{post.id}}">
+                                        {% if post.likes == 1 %}
+                                        <p class="icon"><i class="fa-regular fa-thumbs-up"></i> <strong>{{post.likes}}</strong> like</p>
+                                        {% else %}
+                                        <p class="icon"><i class="fa-regular fa-thumbs-up"></i> <strong>{{post.likes}}</strong> likes</p>
+                                        {% endif %}
+                                    
+                                    </a>
+                                    <p id="comment" value="{{post.user}}" class="icon"><i class="fa-regular fa-comments"></i></p>
+                                    {% if  post.user == user.username %}
+                                    <a href="delete?post_id={{post.id}}">
+                                       <p><i class="fa-solid fa-trash"></i></p>
+                                    </a>
+                                    {% endif %}
+                                </div>
+                               <!--<p><i class="fa-solid fa-ellipsis-vertical"></i></p>-->
+                            </div>
+                        </div>
+                        <div id="comments" class="comments">
+                            <form action="/comment" method="POST" class="write-comment">
+                                {% csrf_token %}
+                                <input name="comment" placeholder="Write comment" />
+                                <input type="hidden" name="post_owner" value="{{post.user}}"/>
+                                <button><i class="fa-regular fa-paper-plane"></i></button>
+                            </form>
+                            {% for comment in comments reversed %}
+                            {% if comment.post_id == post.user%}
+                            <div class="comment">
+                                <div class="slice-title">
+                                    <p>{{comment.commenter | make_list |first | upper}}</p>
+                                </div>
+                                <div>                                    
+                                    <p class="commentor-time">Comment by {{comment.commenter}} | {{comment.created_At}} </p>
+                                    <p class="comment-title">{{comment.comment}} </p>
+                                   
+                                </div>
+                                {% if comment.commenter == user.username%}
+                                <a onclick="preventReloading" href="delete-comment?comment_id={{comment.id}}">
+                                <p class="delete-comment"><i class="fa-solid fa-trash"></i></p>
+                                </a>
+                                {% endif %}
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                        
+                    </div>
+                {%endfor%}
+                          
+
+            </div>
+        </main>
+        <!--Followers&Followering side-->
+       
+          <sidebar class="sidebar">
+            <div class="create">
+                <p>Publish a service or a property</p>
+                <form action="upload" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input class="input" name="service" type="text" placeholder="Type title..." required/>
+                    <input class="input" type="text" name="location" placeholder="Type location..." required/>
+                    <input class="input" type="text" name="cost" placeholder="Type cost..." required/>
+                    <input class="input" type="text" name="phone" placeholder="Business number..." required/>
+                    <textarea class="textarea" name="description" placeholder="Write description..."  required></textarea>
+                    <input class="input" type="file" name="image" required/>
+                    <button class="publish" type="submit">Publish</button>
+                </form>
+            </div>
+            <hr/>
+            <p class="followers-text">Quick search.<br /> The services and property of the people you are following</p>
+            
+            <div class="others">
+                {% for feed in feed_list %}
+                <!--single post-->
+                
+                <div class="single-post">
+                    <img class="image-post" src="{{feed.profileImg.url}}" alt="" />
+                    <div class="text">
+                        <a style="text-decoration:none;" href="{% url 'profile' feed.user %}">
+                        <h1>{{feed.service}}</h1></a>
+                        <p>{{feed.user}}</p>
+                        <p>{{feed.created_At}}</p>
+                        <p>{{feed.likes}}likes</p>
+                    </div>
+                </div>
+                {% endfor %}
+            <!---
+                {% for profile in  profiles %}
+                {% if profile not in feed_list %}
+                
+                <div class="single-post">
+                    <img class="image-post" src="{{profile.profileImg.url}}" alt="" />
+                    <div class="text">
+                        <a style="text-decoration:none;" href="{% url 'profile' profile.user %}">
+                            <h1>{{profile.service}}</h1>
+                        </a>
+                        <p>{{profile.user}}</p>
+                        <p>{{profile.created_At}}</p>
+                        <p>{{profile.likes}}likes</p>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+                -->
+                
+            </div>
+        </sidebar>
+        </div>
+    </section>
+    <script>
+        const commentEl = document.querySelectorAll('#comments')
+        const commentBtn = document.querySelectorAll('#comment')
+        const mobileCreatePostCnt = document.querySelector('.mobile-fields')
+        const createBtn = document.getElementById('create-p-btn')
+        const closeBtn = document.getElementById('close-btn')
+        
+           
+        
+
+        function showComments(){
+          commentBtn.forEach((element) => (
+             element.addEventListener('click', ()=> {
+               commentEl.forEach((comment) => (
+                 comment.classList.toggle('toggle')
+              ))
+             })
+         ))
+        }
+        showComments()
+        //Show friends button
+        const toggleBtn = document.querySelector('.notification');
+        const userBlock = document.querySelector('.notification-tab')
+        //show userBlock when the icon is clicked
+        toggleBtn.addEventListener('click', () => {
+            userBlock.classList.toggle('show')
+        })
+
+        function preventReloading(e){
+            //e.preventDefault()
+            console.log('bazuu')
+        }
+
+        //Mobile create post
+        createBtn.addEventListener('click', () => {
+            mobileCreatePostCnt.classList.add('show')
+        })
+
+        //Close Mobile create post
+        closeBtn.addEventListener('click', () => {
+            mobileCreatePostCnt.classList.remove('show')
+        })
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/service.css' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Peter Gikaru</title>
+</head>
+<body>
+    <nav>
+        <div class="nav-left">
+            <a style="text-decoration:none; color:white" href="{% url 'index'%}">
+                <p>SOCIAL SERVICE</p>
+            </a>
+        </div>
+        <div class="nav-center">
+            <form>
+                <input type="text" name="search" placeholder="Search..." />
+                <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </form>
+        </div>
+        <div class="nav-right">
+            <p class="name">Welcome <strong>{{user.username}}</strong></p>
+            <div class="profile-pic">
+                <img src="{{user_profile.profilePic.url}}" alt="" />
+            </div>
+            <a href="logout">
+                <p> <i class="fa-solid fa-right-from-bracket"></i></p>
+            </a>
+        </div>
+    </nav>
+    <main class="service">
+        <img class="service-img" src="{% static 'images/profile.jpg' %}" alt="" />
+        <div class="connect-details">
+            <h2>Peter Ndambuki</h2>
+            <p style="margin-top:10px"><strong>Business Advocate Services</strong> - <i class="fa-solid fa-location-dot"></i>
+                Located on Nakuru,
+                Highway Towers</p>
+            <p style="color:gray">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur fuga ut reiciendis quo aperiam nesciunt
+                voluptates? Libero earum ratione labore? Sapiente exercitationem dolorum mollitia sequi repellendus saepe
+                esse nihil explicabo quibusdam dolore suscipit, temporibus nobis iure iste pariatur quaerat qui vitae
+                consequuntur! Neque, aliquam ut libero minus pariatur ad optio! Consectetur quas, maiores vel dolores minus
+                nesciunt voluptate hic repellat!</p>
+            <p style="color:gray; margin:5px 0"><i class="fa-regular fa-envelope"></i> peter767@gmail.com</p>    
+            <button>Connect</button>    
+        </div>
+        <p style="padding:10px; color:gray">Related Services from different people</p>
+        <div class="related">            
+            <div class="single-related">
+                <img class="related-img" src="{% static 'images/profile.jpg' %}" alt=""/>
+                <h1>Stephen Kimani</h1>
+                <p>Business Development Officer</p>
+            </div>
+
+            <!--related product-->
+            <div class="single-related">
+                <img class="related-img" src="{% static 'images/profile.jpg' %}" alt="" />
+                <h1>Stephen Kimani</h1>
+                <p>Business Development Officer</p>
+            </div>
+
+            <!--related product-->
+            <div class="single-related">
+                <img class="related-img" src="{% static 'images/profile.jpg' %}" alt="" />
+                <h1>Stephen Kimani</h1>
+                <p>Business Development Officer</p>
+            </div>
+
+            <!--related product-->
+            <div class="single-related">
+                <img class="related-img" src="{% static 'images/profile.jpg' %}" alt="" />
+                <h1>Stephen Kimani</h1>
+                <p>Business Development Officer</p>
+            </div>
+
+            <!--related product-->
+            <div class="single-related">
+                <img class="related-img" src="{% static 'images/profile.jpg' %}" alt="" />
+                <h1>Stephen Kimani</h1>
+                <p>Business Development Officer</p>
+            </div>
+
+            <!--related product-->
+            <div class="single-related">
+                <img class="related-img" src="{% static 'images/profile.jpg' %}" alt="" />
+                <h1>Stephen Kimani</h1>
+                <p>Business Development Officer</p>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
