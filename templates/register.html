@@ -2,32 +2,63 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/register.css' %}" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="X-UA-Compatible"
+      content="IE=edge"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <link
+      rel="stylesheet"
+      href="{% staticfiles 'css/register.css' %}"
+    />
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="register">
-        <h1 class="text-logo">SOCIAL <span>SERVICE</span></h1>
-        <h5 class="register-title">Sign up <span>here</span> to continue</h5>
-        
-        <form action="" method="POST" class="form">
-            {%csrf_token%}
-            <input type="text" name="username" placeholder="Enter name"/>
-            <input type="email" name="email" placeholder="Enter email"/>
-            <input type="password" name="password" placeholder="Enter password"/>
-            <input type="password" name="password2" placeholder="Confirm password"/>
-            <button type="submit">Register</button>
-        </form>
-        <div>
-            {% for message in messages %}
-            <p style="color:red">{{message}}</p>
-            {% endfor %}
-        </div>
-        <p>Already have an account? Sign in<a href="{% url 'login' %}"> here</a></p>
+      <h1 class="text-logo">SOCIAL <span>SERVICE</span></h1>
+      <h5 class="register-title">Sign up <span>here</span> to continue</h5>
+
+      <form
+        action=""
+        method="POST"
+        class="form"
+      >
+        {%csrf_token%}
+        <input
+          type="text"
+          name="username"
+          placeholder="Enter name"
+        />
+        <input
+          type="email"
+          name="email"
+          placeholder="Enter email"
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="Enter password"
+        />
+        <input
+          type="password"
+          name="password2"
+          placeholder="Confirm password"
+        />
+        <button type="submit">Register</button>
+      </form>
+      <div>
+        {% for message in messages %}
+        <p style="color: red">{{message}}</p>
+        {% endfor %}
+      </div>
+      <p>
+        Already have an account? Sign in<a href="{% url 'login' %}"> here</a>
+      </p>
     </div>
-</body>
+  </body>
 </html>
