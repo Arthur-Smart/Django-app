@@ -1,0 +1,92 @@
+/*Account*/
+.upload-icon{
+    width:40px;
+    height:40px;
+    border-radius: 50%;
+    margin-top:-20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor:pointer;
+background-color: #668cff;
+}
+
+.title-post {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 18px;
+    color: white;
+}
+
+.upload-icon p{
+    margin-top: 10px;
+    color:white;
+}
+
+.recommendation {
+    width: 100%;
+    margin-top:40px;
+}
+
+.recommendation h3{
+    margin-left: 4px;
+}
+
+.p-2-follow {
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.p-2-follow img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-left: 4px;
+}
+
+.title-text{
+    display: flex;
+}
+
+.title-text h1{
+    font-size: 18px;
+}
+
+.title-text p{
+    font-size: 14px;
+}
+
+.p-2-follow button{
+    width:100px;
+    margin-right: 4px;
+    background-color: #101C37;
+}
+
+.no-post{
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.no-post a{
+    margin-top: 10px;
+    padding:10px 15px;
+    color:white;
+    border-radius:50px;
+    text-decoration: none;
+    background-color: #668cff;
+    cursor:pointer;
+}
+
+.account-desc{
+    overflow: hidden;
+    text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+}

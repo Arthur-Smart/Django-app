@@ -1,0 +1,59 @@
+.register{
+    width:100%;
+    height:100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+.text-logo{
+    font-size: 30px;
+    margin-bottom: -30px;
+    font-weight: 900;
+    color:gray;
+}
+
+.text-logo span{
+color: #668cff;
+}
+
+.register-title{
+    font-size: 20px;
+    font-weight: 200;
+}
+
+.register-title span{
+    color:#668cff;
+}
+
+.form{
+    width:60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.form input{
+    width:calc(100% - 40px);
+    padding:10px;
+    margin-bottom: 10px;
+    outline:none;
+}
+
+.form button{
+    width:calc(100% - 20px);
+    padding: 10px;
+    border:none;
+    color:white;
+    background-color: #668cff;
+    cursor:pointer;
+}
+
+@media screen and (max-width:640px){
+    .form{
+        width:100%;
+    }
+}
