@@ -36,7 +36,7 @@ def register(request):
                 user_model = User.objects.get(username=username)
                 new_profile = User_Profile.objects.create(user=user_model, id_user=user_model.id)
                 new_profile.save()
-                return redirect('update')
+                return redirect('/')
         else:
             messages.info(request, 'Your passwords do not match')
             return redirect('register')

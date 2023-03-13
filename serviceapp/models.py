@@ -12,7 +12,7 @@ class User_Profile(models.Model):
     location = models.CharField(max_length=100, blank=True)
     phone = models.CharField(max_length=100, blank=True)
     biography = models.TextField(blank=True)
-    profilePic = CloudinaryField('image', default='default.jpg')
+    profilePic = CloudinaryField('image')
     created_At = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -26,8 +26,8 @@ class User_Post(models.Model):
     phone = models.CharField(max_length=100, blank=True)
     cost = models.CharField(max_length=100, blank=True)
     description = models.TextField()
-    image = CloudinaryField('image', default='default.jpg')
-    profileImg = CloudinaryField('image', default='default.jpg')
+    image = models.ImageField(upload_to="post_images", default='default.jpg')
+    profileImg = models.ImageField(upload_to="profile_images", default='default.jpg')
     created_At = models.DateTimeField(default=datetime.now)
     likes = models.IntegerField(default=0)
 
