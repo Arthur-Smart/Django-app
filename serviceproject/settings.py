@@ -13,8 +13,16 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 import os
 
+
+#Cloudinary python classes
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -39,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'serviceapp',
+    'cloudinary'
 ]
 
 MIDDLEWARE = [
@@ -51,6 +60,9 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+
+
 
 ROOT_URLCONF = 'serviceproject.urls'
 
@@ -71,6 +83,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'serviceproject.wsgi.application'
+
 
 
 # Database
@@ -128,6 +141,13 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
+
+# adding config
+cloudinary.config( 
+  cloud_name = "dc86lmshz", 
+  api_key = "175586817848591", 
+  api_secret = "wcF8nO6S_lJjDc9CcB84JCKaKQ0" 
+)
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/'
